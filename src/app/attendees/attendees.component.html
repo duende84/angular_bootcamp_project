@@ -1,3 +1,22 @@
-<p>
-  attendees works!
-</p>
+<div>
+  <h2>Attendees</h2>
+  <div>
+    <label>Name:</label> <input #attendeeName />
+    <button (click)="add(attendeeName.value); attendeeName.value=''">
+      Add
+    </button>
+  </div>
+  <ul>
+    <li *ngFor="let attendee of attendees" (click)="onSelect(attendee)" [class.selected]="attendee === selected">
+      <span>{{attendee.id}}</span>
+      <span>{{attendee.name}}</span>
+      <button (click)="delete(attendee); $event.stopPropagation()">x</button>
+    </li>
+  </ul>
+</div>
+<div *ngIf="selected">
+  <h2>
+    {{selected.name | uppercase}}
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
