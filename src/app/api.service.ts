@@ -13,6 +13,11 @@ export class APIService implements InMemoryDbService {
       { id: 9, name: 'Cesar' },
       { id: 10, name: 'Cristian' }
     ];
-    return {attendees};
+    const notes = [
+      { id: 1, value: 3.0, task: 'Task 1', attendee: 'Andres' },
+      { id: 2, value: 3.0, task: 'Task 1', attendee: 'Juan' },
+      { id: 3, value: 3.0, task: 'Task 1', attendee: 'Mateo' }
+    ];
+    return {attendees, notes};
   }
 }

@@ -1,0 +1,13 @@
+<h2>Add Note</h2>
+<div>
+  <label>Attendee:</label> <input #noteAttendee/>
+  <br>
+  <label>Task:</label> <input #noteTask />
+  <br>
+  <label>Value:</label> <input #noteValue />
+  <br>
+  <button (click)="add(noteAttendee.value,noteTask.value,noteValue.value); noteAttendee.value='';noteTask.value='';noteValue.value=''">
+    Add
+  </button>
+  <button (click)="goBack()">Back</button>
+</div>

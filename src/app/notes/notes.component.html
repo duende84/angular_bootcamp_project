@@ -1,0 +1,19 @@
+<div>
+  <h2>Notes</h2>
+  <button (click)="gotoAdd()">Add Note</button>
+  <ul>
+    <li *ngFor="let note of notes" (click)="onSelect(note)" [class.selected]="note === selected">
+      <span>{{note.id}}</span>
+      <span>{{note.task}}</span>
+      <span>{{note.value}}</span>
+      <span>{{note.attendee}}</span>
+      <button (click)="delete(note); $event.stopPropagation()">x</button>
+    </li>
+  </ul>
+</div>
+<div *ngIf="selected">
+  <h2>
+    {{selected.task + ' - ' + selected.attendee | uppercase}}
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>

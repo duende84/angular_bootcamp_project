@@ -1,0 +1,12 @@
+<div *ngIf="note">
+  <h2>Note details!</h2>
+  <div><label>id: </label>{{note.id}}</div>
+  <div><label>attendee: </label>{{note.attendee}}</div>
+  <div><label>task: </label>{{note.task}}</div>
+  <div>
+    <label>Value: </label>
+    <input [(ngModel)]="note.value" placeholder="value"/>
+  </div>
+  <button (click)="goBack()">Back</button>
+  <button (click)="save()">Save</button>
+</div>
