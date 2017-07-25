@@ -10,6 +10,7 @@ import { AttendeesService } from "./attendees.service";
 import { AttendeesComponent } from './attendees.component';
 import { AttendeesRoutingModule } from "./attendees-routing.module";
 import { DetailsComponent } from './details/details.component';
+import { AddComponent } from './add/add.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { DetailsComponent } from './details/details.component';
   ],
   declarations: [
     AttendeesComponent,
-    DetailsComponent
+    DetailsComponent,
+    AddComponent
   ],
   providers: [
     AttendeesService

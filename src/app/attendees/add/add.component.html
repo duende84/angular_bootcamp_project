@@ -1,0 +1,8 @@
+<h2>Add Attendee</h2>
+<div>
+  <label>Name:</label> <input #attendeeName />
+  <button (click)="add(attendeeName.value); attendeeName.value=''">
+    Add
+  </button>
+  <button (click)="goBack()">Back</button>
+</div>

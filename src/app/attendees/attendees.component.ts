@@ -13,14 +13,14 @@ export class AttendeesComponent implements OnInit {
   attendees: Attendee[];
   selected: Attendee;
 
-  constructor(private attendeeService: AttendeesService, private router: Router) { }
+  constructor(private attendeesService: AttendeesService, private router: Router) { }
 
   ngOnInit(): void {
     this.getAttendees();
   }
 
   getAttendees(): void {
-    this.attendeeService.getAttendeees().then(attendees => this.attendees = attendees);
+    this.attendeesService.getAttendeees().then(attendees => this.attendees = attendees);
   }
 
   onSelect(attendee: Attendee): void {
@@ -28,21 +28,15 @@ export class AttendeesComponent implements OnInit {
   }
 
   gotoDetail(): void {
-    this.router.navigate(['/detail', this.selected.id]);
+    this.router.navigate(['/attendees', this.selected.id]);
   }
 
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.attendeeService.create(name)
-      .then(attendee => {
-        this.attendees.push(attendee);
-        this.selected = null;
-      });
+  gotoAdd(): void {
+    this.router.navigate(['/attendees/add']);
   }
 
   delete(attendee: Attendee): void {
-    this.attendeeService
+    this.attendeesService
         .delete(attendee.id)
         .then(() => {
           this.attendees = this.attendees.filter(h => h !== attendee);

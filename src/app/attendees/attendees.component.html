@@ -1,11 +1,6 @@
 <div>
   <h2>Attendees</h2>
-  <div>
-    <label>Name:</label> <input #attendeeName />
-    <button (click)="add(attendeeName.value); attendeeName.value=''">
-      Add
-    </button>
-  </div>
+  <button (click)="gotoAdd()">Add Attendee</button>
   <ul>
     <li *ngFor="let attendee of attendees" (click)="onSelect(attendee)" [class.selected]="attendee === selected">
       <span>{{attendee.id}}</span>
