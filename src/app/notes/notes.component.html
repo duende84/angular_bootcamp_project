@@ -1,19 +1,46 @@
 <div>
   <h2>Notes</h2>
   <button (click)="gotoAdd()">Add Note</button>
-  <ul>
-    <li *ngFor="let note of notes" (click)="onSelect(note)" [class.selected]="note === selected">
-      <span>{{note.id}}</span>
-      <span>{{note.task}}</span>
-      <span>{{note.value}}</span>
-      <span>{{note.attendee}}</span>
-      <button (click)="delete(note); $event.stopPropagation()">x</button>
-    </li>
-  </ul>
-</div>
-<div *ngIf="selected">
-  <h2>
-    {{selected.task + ' - ' + selected.attendee | uppercase}}
-  </h2>
-  <button (click)="gotoDetail()">View Details</button>
+  <div class="container mat-elevation-z8">
+    <div class="header">
+      <md-input-container floatPlaceholder="never">
+        <input mdInput #filter placeholder="Filter notes">
+      </md-input-container>
+    </div>
+
+    <md-table #table [dataSource]="dataSource" mdSort>
+      <ng-container cdkColumnDef="id">
+        <md-header-cell *cdkHeaderCellDef md-sort-header> ID </md-header-cell>
+        <md-cell *cdkCellDef="let row"> {{row.id}} </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="task">
+        <md-header-cell *cdkHeaderCellDef md-sort-header> Task </md-header-cell>
+        <md-cell *cdkCellDef="let row"> {{row.task}} </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="attendee">
+        <md-header-cell *cdkHeaderCellDef md-sort-header> Attendee </md-header-cell>
+        <md-cell *cdkCellDef="let row"> {{row.attendee}} </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="value">
+        <md-header-cell *cdkHeaderCellDef md-sort-header> Value </md-header-cell>
+        <md-cell *cdkCellDef="let row"> {{row.value}} </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="details">
+        <md-header-cell *cdkHeaderCellDef> View Details </md-header-cell>
+        <md-cell *cdkCellDef="let row" (click)="gotoDetail(row.id)"> View Details </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="delete">
+        <md-header-cell *cdkHeaderCellDef> Delete </md-header-cell>
+        <md-cell *cdkCellDef="let row" (click)="delete(row.id)"> Delete </md-cell>
+      </ng-container>
+
+      <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+      <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+    </md-table>
+  </div>
 </div>

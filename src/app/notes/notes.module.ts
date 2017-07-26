@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CdkTableModule } from '@angular/cdk';
+import { MdTableModule, MdSortModule, MdInputModule, MdButtonModule, MdNativeDateModule } from '@angular/material';
 
 import { APIService } from './../api.service';
 import { NotesService } from "./notes.service";
@@ -16,9 +19,16 @@ import { AddComponent } from './add/add.component';
   imports: [
     CommonModule,
     HttpModule,
-    FormsModule,
     NotesRoutingModule,
-    InMemoryWebApiModule.forRoot(APIService)
+    FormsModule,
+    ReactiveFormsModule,
+    InMemoryWebApiModule.forRoot(APIService),
+    BrowserAnimationsModule,
+    CdkTableModule,
+    MdTableModule,
+    MdSortModule,
+    MdInputModule,
+    MdButtonModule
   ],
   declarations: [
     NotesComponent,
