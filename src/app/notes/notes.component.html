@@ -31,12 +31,12 @@
 
       <ng-container cdkColumnDef="details">
         <md-header-cell *cdkHeaderCellDef> View Details </md-header-cell>
-        <md-cell *cdkCellDef="let row" (click)="gotoDetail(row.id)"> View Details </md-cell>
+        <md-cell *cdkCellDef="let row"><button (click)="gotoDetail(row.id)">View Details</button></md-cell>
       </ng-container>
 
       <ng-container cdkColumnDef="delete">
         <md-header-cell *cdkHeaderCellDef> Delete </md-header-cell>
-        <md-cell *cdkCellDef="let row" (click)="delete(row.id)"> Delete </md-cell>
+        <md-cell *cdkCellDef="let row"><button (click)="delete(row.id)">Delete</button></md-cell>
       </ng-container>
 
       <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
