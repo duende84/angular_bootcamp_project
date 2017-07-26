@@ -1,17 +1,36 @@
 <div>
   <h2>Attendees</h2>
   <button (click)="gotoAdd()">Add Attendee</button>
-  <ul>
-    <li *ngFor="let attendee of attendees" (click)="onSelect(attendee)" [class.selected]="attendee === selected">
-      <span>{{attendee.id}}</span>
-      <span>{{attendee.name}}</span>
-      <button (click)="delete(attendee); $event.stopPropagation()">x</button>
-    </li>
-  </ul>
-</div>
-<div *ngIf="selected">
-  <h2>
-    {{selected.name | uppercase}}
-  </h2>
-  <button (click)="gotoDetail()">View Details</button>
+  <div class="container mat-elevation-z8">
+    <div class="header">
+      <md-input-container floatPlaceholder="never">
+        <input mdInput #filter placeholder="Filter attendees">
+      </md-input-container>
+    </div>
+
+    <md-table #table [dataSource]="dataSource" mdSort>
+      <ng-container cdkColumnDef="id">
+        <md-header-cell *cdkHeaderCellDef md-sort-header> ID </md-header-cell>
+        <md-cell *cdkCellDef="let row"> {{row.id}} </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="name">
+        <md-header-cell *cdkHeaderCellDef md-sort-header> Name </md-header-cell>
+        <md-cell *cdkCellDef="let row"> {{row.name}} </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="details">
+        <md-header-cell *cdkHeaderCellDef> View Details </md-header-cell>
+        <md-cell *cdkCellDef="let row"><button (click)="gotoDetail(row.id)">View Details</button></md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="delete">
+        <md-header-cell *cdkHeaderCellDef> Delete </md-header-cell>
+        <md-cell *cdkCellDef="let row"><button (click)="delete(row.id)">Delete</button></md-cell>
+      </ng-container>
+
+      <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+      <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+    </md-table>
+  </div>
 </div>
