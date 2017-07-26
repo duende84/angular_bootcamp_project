@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { TasksService } from "../tasks.service";
+import { Task } from "../task.model";
 
 @Component({
   selector: 'app-add',
@@ -10,12 +11,15 @@ import { TasksService } from "../tasks.service";
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
+  task: Task;
 
   constructor(
     private tasksService: TasksService,
     private route: ActivatedRoute,
     private location: Location
-  ) {}
+  ) {
+    this.task = new Task();
+  }
 
   ngOnInit() {
   }
@@ -24,10 +28,7 @@ export class AddComponent implements OnInit {
     this.location.back();
   }
 
-  add(title: string, end_date:string): void {
-    title = title.trim();
-    end_date = end_date.trim();
-    if (!title || !end_date) { return; }
-    this.tasksService.create(title, end_date).then(attendee => this.goBack());
+  add(): void {
+    this.tasksService.create(this.task).then(attendee => this.goBack());
   }
 }

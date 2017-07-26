@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { AttendeesService } from "../attendees.service";
+import { Attendee } from "../attendee.model";
 
 @Component({
   selector: 'app-add',
@@ -10,12 +11,15 @@ import { AttendeesService } from "../attendees.service";
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
+  attendee: Attendee;
 
   constructor(
     private attendeesService: AttendeesService,
     private route: ActivatedRoute,
     private location: Location
-  ) {}
+  ) {
+    this.attendee = new Attendee();
+  }
 
   ngOnInit() {
   }
@@ -24,9 +28,7 @@ export class AddComponent implements OnInit {
     this.location.back();
   }
 
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.attendeesService.create(name).then(attendee => this.goBack());
+  add(): void {
+    this.attendeesService.create(this.attendee).then(attendee => this.goBack());
   }
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { NotesService } from "../notes.service";
+import { Note } from "../note.model";
 
 @Component({
   selector: 'app-add',
@@ -10,12 +11,15 @@ import { NotesService } from "../notes.service";
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
+  note: Note;
 
   constructor(
     private notesService: NotesService,
     private route: ActivatedRoute,
     private location: Location
-  ) {}
+  ) {
+    this.note = new Note();
+  }
 
   ngOnInit() {
   }
@@ -24,10 +28,7 @@ export class AddComponent implements OnInit {
     this.location.back();
   }
 
-  add(attendee: string, task:string, value:number): void {
-    attendee = attendee.trim();
-    task = task.trim();
-    if (!attendee || !task) { return; }
-    this.notesService.create(attendee, task, value).then(note => this.goBack());
+  add(): void {
+    this.notesService.create(this.note).then(note => this.goBack());
   }
 }

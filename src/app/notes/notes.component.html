@@ -1,6 +1,7 @@
 <div>
-  <h2>Notes</h2>
-  <button (click)="gotoAdd()">Add Note</button>
+  <br><br>
+  <button md-raised-button (click)="gotoAdd()">Add Note</button>
+  <br><br>
   <div class="container mat-elevation-z8">
     <div class="header">
       <md-input-container floatPlaceholder="never">
@@ -31,12 +32,12 @@
 
       <ng-container cdkColumnDef="details">
         <md-header-cell *cdkHeaderCellDef> View Details </md-header-cell>
-        <md-cell *cdkCellDef="let row"><button (click)="gotoDetail(row.id)">View Details</button></md-cell>
+        <md-cell *cdkCellDef="let row"><button md-raised-button (click)="gotoDetail(row.id)">View Details</button></md-cell>
       </ng-container>
 
       <ng-container cdkColumnDef="delete">
         <md-header-cell *cdkHeaderCellDef> Delete </md-header-cell>
-        <md-cell *cdkCellDef="let row"><button (click)="delete(row.id)">Delete</button></md-cell>
+        <md-cell *cdkCellDef="let row"><button md-raised-button (click)="delete(row.id)">Delete</button></md-cell>
       </ng-container>
 
       <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>

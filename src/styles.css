@@ -29,3 +29,11 @@
 .mat-header-cell .mat-sort-header-sorted {
   color: black;
 }
+
+.example-form {
+  width: 500px;
+}
+
+.example-full-width {
+  width: 100%;
+}

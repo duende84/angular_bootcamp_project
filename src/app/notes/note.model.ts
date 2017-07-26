@@ -3,7 +3,7 @@ import { Task } from "../tasks/task.model";
 
 export class Note {
 	id:number;
-	value:string;
+	value:number;
 	task:string;
 	attendee:string;
 }

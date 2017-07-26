@@ -1,10 +1,32 @@
 <div *ngIf="attendee">
-  <h2>{{attendee.name}} details!</h2>
-  <div><label>id: </label>{{attendee.id}}</div>
-  <div>
-    <label>name: </label>
-    <input [(ngModel)]="attendee.name" placeholder="name"/>
-  </div>
-  <button (click)="goBack()">Back</button>
-  <button (click)="save()">Save</button>
+  <form #attendeeForm="ngForm" class="example-form">
+    <h2>{{attendee.name}} details!</h2>
+    <md-input-container class="example-full-width">
+      <input 
+        mdInput 
+        disabled 
+        name="id"
+        placeholder="Id" 
+        value={{attendee.id}}/>
+    </md-input-container>
+    <md-input-container class="example-full-width">
+      <input
+        mdInput 
+        required 
+        name="name" 
+        placeholder="Name"
+        minlength="5" maxlength="30"
+        #name="ngModel" 
+        [(ngModel)]="attendee.name"/>
+      <md-error *ngIf="name.errors && (name.dirty || name.touched) && name.errors.minlength">
+        Name minlength is 5
+      </md-error>
+      <md-error *ngIf="name.errors && (name.dirty || name.touched) && name.errors.required">
+        Name is <strong>required</strong>
+      </md-error>
+    </md-input-container>
+    <br><br>
+    <button md-raised-button [disabled]="!attendeeForm.form.valid" (click)="save()">Save</button>
+    <button md-raised-button (click)="goBack()">Back</button>
+  </form>
 </div>

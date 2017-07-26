@@ -36,9 +36,9 @@ export class TasksService {
       .catch(this.handleError);
   }
 
-  create(title: string, end_date:string): Promise<Task> {
+  create(task: Task): Promise<Task> {
     return this.http
-      .post(this.tasksUrl, JSON.stringify({title: title, end_date: end_date}), {headers: this.headers})
+      .post(this.tasksUrl, JSON.stringify({title: task.title, end_date: task.end_date}), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data as Task)
       .catch(this.handleError);

@@ -36,10 +36,9 @@ export class NotesService {
       .catch(this.handleError);
   }
 
-  create(attendee: string, task:string, value:number): Promise<Note> {
-    console.log(attendee, task, value);
+  create(note: Note): Promise<Note> {
     return this.http
-      .post(this.notesUrl, JSON.stringify({attendee: attendee, task: task, value: value}), {headers: this.headers})
+      .post(this.notesUrl, JSON.stringify({attendee: note.attendee, task: note.task, value: note.value}), {headers: this.headers})
       .toPromise()
       .then(res => {
         console.log("res: ", res);

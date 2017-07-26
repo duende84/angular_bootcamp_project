@@ -1,12 +1,44 @@
 <div *ngIf="note">
-  <h2>Note details!</h2>
-  <div><label>id: </label>{{note.id}}</div>
-  <div><label>attendee: </label>{{note.attendee}}</div>
-  <div><label>task: </label>{{note.task}}</div>
-  <div>
-    <label>Value: </label>
-    <input [(ngModel)]="note.value" placeholder="value"/>
-  </div>
-  <button (click)="goBack()">Back</button>
-  <button (click)="save()">Save</button>
+  <form #noteForm="ngForm" class="example-form">
+    <h2>Note details!</h2>
+    <md-input-container class="example-full-width">
+      <input 
+        mdInput 
+        disabled 
+        name="id"
+        placeholder="Id" 
+        value={{note.id}}/>
+    </md-input-container>
+    <md-input-container class="example-full-width">
+      <input 
+        mdInput 
+        disabled 
+        name="attendee"
+        placeholder="Attendee" 
+        value={{note.attendee}}/>
+    </md-input-container>
+    <md-input-container class="example-full-width">
+      <input 
+        mdInput 
+        disabled 
+        name="task"
+        placeholder="Task" 
+        value={{note.task}}/>
+    </md-input-container>
+    <md-input-container class="example-full-width">
+      <input type="number"
+        mdInput 
+        required 
+        name="value" 
+        placeholder="Value"
+        #value="ngModel" 
+        [(ngModel)]="note.value"/>
+      <md-error *ngIf="value.errors && (value.dirty || value.touched) && value.errors.required">
+        Value is <strong>required</strong>
+      </md-error>
+    </md-input-container>
+    <br><br>
+    <button md-raised-button [disabled]="!noteForm.form.valid" (click)="save()">Save</button>
+    <button md-raised-button (click)="goBack()">Back</button>
+  </form>
 </div>

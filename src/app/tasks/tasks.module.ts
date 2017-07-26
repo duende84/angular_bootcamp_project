@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkTableModule } from '@angular/cdk';
-import { MdTableModule, MdSortModule, MdInputModule, MdButtonModule, MdNativeDateModule } from '@angular/material';
+import { MdTableModule, MdSortModule, MdInputModule, MdButtonModule, MdNativeDateModule, MdDatepickerModule } from '@angular/material';
 
 import { APIService } from './../api.service';
 import { TasksService } from "./tasks.service";
@@ -28,7 +28,9 @@ import { AddComponent } from './add/add.component';
     MdTableModule,
     MdSortModule,
     MdInputModule,
-    MdButtonModule
+    MdButtonModule,
+    MdNativeDateModule,
+    MdDatepickerModule
   ],
   declarations: [
     TasksComponent,

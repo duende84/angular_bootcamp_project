@@ -1,8 +1,22 @@
 <h2>Add Attendee</h2>
-<div>
-  <label>Name:</label> <input #attendeeName />
-  <button (click)="add(attendeeName.value); attendeeName.value=''">
-    Add
-  </button>
-  <button (click)="goBack()">Back</button>
-</div>
+<form #attendeeForm="ngForm" class="example-form">
+  <md-input-container class="example-full-width">
+    <input
+      mdInput 
+      required 
+      name="name" 
+      placeholder="Name"
+      minlength="5" maxlength="30"
+      #name="ngModel" 
+      [(ngModel)]="attendee.name"/>
+    <md-error *ngIf="name.errors && (name.dirty || name.touched) && name.errors.minlength">
+      Name minlength is 5
+    </md-error>
+    <md-error *ngIf="name.errors && (name.dirty || name.touched) && name.errors.required">
+      Name is <strong>required</strong>
+    </md-error>
+  </md-input-container>
+  <br><br>
+  <button md-raised-button [disabled]="!attendeeForm.form.valid" (click)="add()">Save</button>
+  <button md-raised-button (click)="goBack()">Back</button>
+</form>
