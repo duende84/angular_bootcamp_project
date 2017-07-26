@@ -6,6 +6,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AttendeesModule } from "./attendees/attendees.module";
 import { NotesModule } from "./notes/notes.module";
 import { TasksModule } from "./tasks/tasks.module";
+import { DashboardModule } from "./dashboard/dashboard.module";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { TasksModule } from "./tasks/tasks.module";
     AttendeesModule,
     NotesModule,
     TasksModule,
+    DashboardModule,
     AppRoutingModule
   ],
   providers: [],
