@@ -1,8 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DataSource } from '@angular/cdk';
+import { MdSort } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/observable/fromEvent';
 
 import { Task } from './task.model';
 import { TasksService } from './tasks.service';
+import { TasksDatabase } from './tasks.database';
+import { TasksDataSource } from './tasks.datasource';
 
 @Component({
   selector: 'app-tasks',
@@ -10,37 +18,39 @@ import { TasksService } from './tasks.service';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
-  tasks: Task[];
-  selected: Task;
+  displayedColumns = ['id', 'title', 'end_date', 'details', 'delete'];
+  tasks = new TasksDatabase(this.tasksService);
+  dataSource: TasksDataSource | null;
 
   constructor(private tasksService: TasksService, private router: Router) { }
 
-  ngOnInit(): void {
-    this.getTasks();
+  @ViewChild('filter') filter: ElementRef;
+  @ViewChild(MdSort) sort: MdSort;
+
+  ngOnInit() {
+    this.dataSource = new TasksDataSource(this.tasks, this.sort);
+    Observable.fromEvent(this.filter.nativeElement, 'keyup')
+      .debounceTime(150)
+      .distinctUntilChanged()
+      .subscribe(() => {
+        if (!this.dataSource) { return; }
+        this.dataSource.filter = this.filter.nativeElement.value;
+      });
   }
 
-  getTasks(): void {
-    this.tasksService.getTasks().then(tasks => this.tasks = tasks);
-  }
-
-  onSelect(task: Task): void {
-    this.selected = task;
-  }
-
-  gotoDetail(): void {
-    this.router.navigate(['/tasks', this.selected.id]);
+  gotoDetail(id: number): void {
+    this.router.navigate(['/tasks', id]);
   }
 
   gotoAdd(): void {
     this.router.navigate(['/tasks/add']);
   }
 
-  delete(task: Task): void {
+  delete(id: number): void {
     this.tasksService
-        .delete(task.id)
-        .then(() => {
-          this.tasks = this.tasks.filter(h => h !== task);
-          if (this.selected === task) { this.selected = null; }
-        });
+      .delete(id)
+      .then(() => {
+        this.tasks.remove(id);
+      });
   }
 }

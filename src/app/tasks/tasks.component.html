@@ -1,18 +1,41 @@
 <div>
   <h2>Tasks</h2>
   <button (click)="gotoAdd()">Add Task</button>
-  <ul>
-    <li *ngFor="let task of tasks" (click)="onSelect(task)" [class.selected]="task === selected">
-      <span>{{task.id}}</span>
-      <span>{{task.title}}</span>
-      <span>{{task.end_date}}</span>
-      <button (click)="delete(task); $event.stopPropagation()">x</button>
-    </li>
-  </ul>
-</div>
-<div *ngIf="selected">
-  <h2>
-    {{selected.title | uppercase}}
-  </h2>
-  <button (click)="gotoDetail()">View Details</button>
+  <div class="container mat-elevation-z8">
+    <div class="header">
+      <md-input-container floatPlaceholder="never">
+        <input mdInput #filter placeholder="Filter tasks">
+      </md-input-container>
+    </div>
+
+    <md-table #table [dataSource]="dataSource" mdSort>
+      <ng-container cdkColumnDef="id">
+        <md-header-cell *cdkHeaderCellDef md-sort-header> ID </md-header-cell>
+        <md-cell *cdkCellDef="let row"> {{row.id}} </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="title">
+        <md-header-cell *cdkHeaderCellDef md-sort-header> Title </md-header-cell>
+        <md-cell *cdkCellDef="let row"> {{row.title}} </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="end_date">
+        <md-header-cell *cdkHeaderCellDef md-sort-header> End Date </md-header-cell>
+        <md-cell *cdkCellDef="let row"> {{row.end_date}} </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="details">
+        <md-header-cell *cdkHeaderCellDef> View Details </md-header-cell>
+        <md-cell *cdkCellDef="let row"><button (click)="gotoDetail(row.id)">View Details</button></md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="delete">
+        <md-header-cell *cdkHeaderCellDef> Delete </md-header-cell>
+        <md-cell *cdkCellDef="let row"><button (click)="delete(row.id)">Delete</button></md-cell>
+      </ng-container>
+
+      <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+      <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+    </md-table>
+  </div>
 </div>
