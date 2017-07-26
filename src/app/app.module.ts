@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from "./app-routing.module";
 import { AttendeesModule } from "./attendees/attendees.module";
 import { NotesModule } from "./notes/notes.module";
+import { TasksModule } from "./tasks/tasks.module";
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { NotesModule } from "./notes/notes.module";
     BrowserModule,
     AttendeesModule,
     NotesModule,
+    TasksModule,
     AppRoutingModule
   ],
   providers: [],

@@ -1,0 +1,11 @@
+<h2>Add Task</h2>
+<div>
+  <label>Title:</label> <input #taskTitle />
+  <br>
+  <label>End Date:</label> <input #taskDate />
+  <br>
+  <button (click)="add(taskTitle.value, taskDate.value); taskTitle.value=''; taskDate.value=''">
+    Add
+  </button>
+  <button (click)="goBack()">Back</button>
+</div>
