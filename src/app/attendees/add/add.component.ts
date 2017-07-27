@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 
 import { AttendeesService } from "../attendees.service";
 import { Attendee } from "../attendee.model";
+import { TasksService } from "../../tasks/tasks.service";
 
 @Component({
   selector: 'app-add',
@@ -15,6 +16,7 @@ export class AddComponent implements OnInit {
 
   constructor(
     private attendeesService: AttendeesService,
+    private tasksService: TasksService,
     private route: ActivatedRoute,
     private location: Location
   ) {
@@ -29,6 +31,11 @@ export class AddComponent implements OnInit {
   }
 
   add(): void {
-    this.attendeesService.create(this.attendee).then(attendee => this.goBack());
+    this.tasksService.getTasks().then(tasks => {
+      this.attendee.missing_tasks = tasks.length;
+      this.attendee.delivered_tasks = 0;
+      this.attendee.average_grade = 0;
+      this.attendeesService.create(this.attendee).then(attendee => this.goBack());
+    });
   }
 }
