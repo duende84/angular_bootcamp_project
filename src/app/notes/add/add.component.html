@@ -1,40 +1,46 @@
-<h2>Add Note</h2>
-<form #noteForm="ngForm" class="example-form">
-  <md-select class="example-full-width"
-    required 
-    name="attendee" 
-    placeholder="Attendee" 
-    #attendee="ngModel"
-    [(ngModel)]="note.attendee">
-    <md-option *ngFor="let attendee of attendees" [value]="attendee.name">
-      {{attendee.name}}
-    </md-option>
-  </md-select>
-  <br><br>
-  <md-select class="example-full-width"
-    required 
-    name="task" 
-    placeholder="task" 
-    #task="ngModel"
-    [(ngModel)]="note.task">
-    <md-option *ngFor="let task of tasks" [value]="task.title">
-      {{task.title}}
-    </md-option>
-  </md-select>
-  <br><br>
-  <md-input-container class="example-full-width">
-    <input type="number"
-      mdInput 
-      required 
-      name="value" 
-      placeholder="Value"
-      #value="ngModel" 
-      [(ngModel)]="note.value"/>
-    <md-error *ngIf="value.errors && (value.dirty || value.touched) && value.errors.required">
-      Value is <strong>required</strong>
-    </md-error>
-  </md-input-container>
-  <br><br>
-  <button md-raised-button [disabled]="!noteForm.form.valid" (click)="add()">Save</button>
-  <button md-raised-button (click)="goBack()">Back</button>
-</form>
+<md-card>
+  <md-card-header>
+    <md-card-title>Add Note</md-card-title>
+  </md-card-header>
+  <md-card-content>
+    <form #noteForm="ngForm" class="example-form">
+      <md-select class="example-full-width"
+        required 
+        name="attendee" 
+        placeholder="Attendee" 
+        #attendee="ngModel"
+        [(ngModel)]="note.attendee">
+        <md-option *ngFor="let attendee of attendees" [value]="attendee.name">
+          {{attendee.name}}
+        </md-option>
+      </md-select>
+      <br><br>
+      <md-select class="example-full-width"
+        required 
+        name="task" 
+        placeholder="Task" 
+        #task="ngModel"
+        [(ngModel)]="note.task">
+        <md-option *ngFor="let task of tasks" [value]="task.title">
+          {{task.title}}
+        </md-option>
+      </md-select>
+      <br><br>
+      <md-input-container class="example-full-width">
+        <input type="number"
+          mdInput 
+          required 
+          name="value" 
+          placeholder="Value"
+          #value="ngModel" 
+          [(ngModel)]="note.value"/>
+        <md-error *ngIf="value.errors && (value.dirty || value.touched) && value.errors.required">
+          Value is <strong>required</strong>
+        </md-error>
+      </md-input-container>
+      <br><br>
+      <button md-raised-button [disabled]="!noteForm.form.valid" (click)="add()">Save</button>
+      <button md-raised-button (click)="goBack()">Back</button>
+    </form>
+  </md-card-content>
+</md-card>

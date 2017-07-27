@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { APIService } from './../api.service';
 import { AttendeesService } from "./../attendees/attendees.service";
@@ -15,8 +14,7 @@ import { DashboardRoutingModule } from "./dashboard-routing.module";
     CommonModule,
     DashboardRoutingModule,
     FormsModule,
-    InMemoryWebApiModule.forRoot(APIService),
-    BrowserAnimationsModule
+    InMemoryWebApiModule.forRoot(APIService)
   ],
   declarations: [
     DashboardComponent

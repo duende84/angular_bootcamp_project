@@ -1,48 +1,54 @@
 <div *ngIf="task">
-  <form #taskForm="ngForm" class="example-form">
-    <h2>{{task.title}} details!</h2>
-    <md-input-container class="example-full-width">
-      <input 
-        mdInput 
-        disabled 
-        name="id"
-        placeholder="Id" 
-        value={{task.id}}/>
-    </md-input-container>
-    <md-input-container class="example-full-width">
-      <input
-        mdInput 
-        required 
-        name="title" 
-        placeholder="Title"
-        minlength="5" maxlength="30"
-        #title="ngModel" 
-        [(ngModel)]="task.title"/>
-      <md-error *ngIf="title.errors && (title.dirty || title.touched) && title.errors.minlength">
-        Title minlength is 5
-      </md-error>
-      <md-error *ngIf="title.errors && (title.dirty || title.touched) && title.errors.required">
-        Title is <strong>required</strong>
-      </md-error>
-    </md-input-container>
-    <br><br>
-    <md-input-container class="example-full-width">
-      <input 
-        mdInput
-        required
-        name="endDate"
-        placeholder="Choose task end date" 
-        [mdDatepicker]="picker"
-        #endDate="ngModel"  
-        [(ngModel)]="task.end_date">
-      <button mdSuffix [mdDatepickerToggle]="picker"></button>
-      <md-error *ngIf="endDate.errors && (endDate.dirty || endDate.touched) && endDate.errors.required">
-        End Date is <strong>required</strong>
-      </md-error>
-    </md-input-container>
-    <md-datepicker #picker></md-datepicker>
-    <br><br>
-    <button md-raised-button [disabled]="!taskForm.form.valid" (click)="save()">Save</button>
-    <button md-raised-button (click)="goBack()">Back</button>
-  </form>
+  <md-card>
+    <md-card-header>
+      <md-card-title>{{task.title}} details!</md-card-title>
+    </md-card-header>
+    <md-card-content>
+      <form #taskForm="ngForm" class="example-form">
+        <md-input-container class="example-full-width">
+          <input 
+            mdInput 
+            disabled 
+            name="id"
+            placeholder="Id" 
+            value={{task.id}}/>
+        </md-input-container>
+        <md-input-container class="example-full-width">
+          <input
+            mdInput 
+            required 
+            name="title" 
+            placeholder="Title"
+            minlength="5" maxlength="30"
+            #title="ngModel" 
+            [(ngModel)]="task.title"/>
+          <md-error *ngIf="title.errors && (title.dirty || title.touched) && title.errors.minlength">
+            Title minlength is 5
+          </md-error>
+          <md-error *ngIf="title.errors && (title.dirty || title.touched) && title.errors.required">
+            Title is <strong>required</strong>
+          </md-error>
+        </md-input-container>
+        <br><br>
+        <md-input-container class="example-full-width">
+          <input 
+            mdInput
+            required
+            name="endDate"
+            placeholder="Choose task end date" 
+            [mdDatepicker]="picker"
+            #endDate="ngModel"  
+            [(ngModel)]="task.end_date">
+          <button mdSuffix [mdDatepickerToggle]="picker"></button>
+          <md-error *ngIf="endDate.errors && (endDate.dirty || endDate.touched) && endDate.errors.required">
+            End Date is <strong>required</strong>
+          </md-error>
+        </md-input-container>
+        <md-datepicker #picker></md-datepicker>
+        <br><br>
+        <button md-raised-button [disabled]="!taskForm.form.valid" (click)="save()">Save</button>
+        <button md-raised-button (click)="goBack()">Back</button>
+      </form>
+    </md-card-content>
+  </md-card>
 </div>
