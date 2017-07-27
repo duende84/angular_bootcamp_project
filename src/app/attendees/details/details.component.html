@@ -30,6 +30,16 @@
           </md-error>
         </md-input-container>
         <br><br>
+        <md-input-container class="example-full-width">
+          <input
+            mdInput  
+            name="photo" 
+            placeholder="Photo"
+            #name="ngModel" 
+            [(ngModel)]="attendee.photo"/>
+          <img class="example-image-large" src={{attendee.photo}} *ngIf="attendee.photo">
+        </md-input-container>
+        <br><br>
         <button md-raised-button [disabled]="!attendeeForm.form.valid" (click)="save()">Save</button>
         <button md-raised-button (click)="goBack()">Back</button>
       </form>

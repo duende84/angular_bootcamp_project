@@ -15,9 +15,19 @@
         <md-cell *cdkCellDef="let row"> {{row.id}} </md-cell>
       </ng-container>
 
+      <ng-container cdkColumnDef="photo">
+        <md-header-cell *cdkHeaderCellDef md-sort-header> Photo </md-header-cell>
+        <md-cell *cdkCellDef="let row"><img class="example-image-small" src={{row.photo}} alt={{row.name}}></md-cell>
+      </ng-container>
+
       <ng-container cdkColumnDef="name">
         <md-header-cell *cdkHeaderCellDef md-sort-header> Name </md-header-cell>
         <md-cell *cdkCellDef="let row"> {{row.name}} </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="updated_at">
+        <md-header-cell *cdkHeaderCellDef md-sort-header> Updated At </md-header-cell>
+        <md-cell *cdkCellDef="let row"> {{row.updated_at | date:'medium'}} </md-cell>
       </ng-container>
 
       <ng-container cdkColumnDef="details">

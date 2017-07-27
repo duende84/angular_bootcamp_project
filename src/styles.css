@@ -36,3 +36,11 @@
 .example-full-width {
   width: 100%;
 }
+
+.example-image-small {
+  width: 50px;
+}
+
+.example-image-large {
+  width: 200px;
+}

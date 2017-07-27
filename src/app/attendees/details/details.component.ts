@@ -31,6 +31,7 @@ export class DetailsComponent implements OnInit {
   }
 
   save(): void {
+    this.attendee.updated_at = Date.now();
     this.attendeesService.update(this.attendee)
       .then(() => this.goBack());
   }

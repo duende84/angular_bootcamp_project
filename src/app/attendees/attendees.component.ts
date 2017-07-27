@@ -18,7 +18,7 @@ import { AttendeesDataSource } from './attendees.datasource';
   styleUrls: ['./attendees.component.css']
 })
 export class AttendeesComponent implements OnInit {
-  displayedColumns = ['id', 'name', 'details', 'delete'];
+  displayedColumns = ['id', 'photo', 'name', 'updated_at', 'details', 'delete'];
   attendees = new AttendeesDatabase(this.attendeesService);
   dataSource: AttendeesDataSource | null;
 
