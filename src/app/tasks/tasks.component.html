@@ -22,7 +22,7 @@
 
       <ng-container cdkColumnDef="end_date">
         <md-header-cell *cdkHeaderCellDef md-sort-header> End Date </md-header-cell>
-        <md-cell *cdkCellDef="let row"> {{row.end_date}} </md-cell>
+        <md-cell *cdkCellDef="let row"> {{row.end_date | date}} </md-cell>
       </ng-container>
 
       <ng-container cdkColumnDef="details">

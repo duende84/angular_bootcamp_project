@@ -1,38 +1,26 @@
 <h2>Add Note</h2>
 <form #noteForm="ngForm" class="example-form">
-  <md-input-container class="example-full-width">
-    <input
-      mdInput 
-      required 
-      name="attendee" 
-      placeholder="Attendee"
-      minlength="5" maxlength="30"
-      #attendee="ngModel" 
-      [(ngModel)]="note.attendee"/>
-    <md-error *ngIf="attendee.errors && (attendee.dirty || attendee.touched) && attendee.errors.minlength">
-      Attendee minlength is 5
-    </md-error>
-    <md-error *ngIf="attendee.errors && (attendee.dirty || attendee.touched) && attendee.errors.required">
-      Attendee is <strong>required</strong>
-    </md-error>
-  </md-input-container>
+  <md-select class="example-full-width"
+    required 
+    name="attendee" 
+    placeholder="Attendee" 
+    #attendee="ngModel"
+    [(ngModel)]="note.attendee">
+    <md-option *ngFor="let attendee of attendees" [value]="attendee.name">
+      {{attendee.name}}
+    </md-option>
+  </md-select>
   <br><br>
-  <md-input-container class="example-full-width">
-    <input
-      mdInput 
-      required 
-      name="task" 
-      placeholder="Task"
-      minlength="5" maxlength="30"
-      #task="ngModel" 
-      [(ngModel)]="note.task"/>
-    <md-error *ngIf="task.errors && (task.dirty || task.touched) && task.errors.minlength">
-      Task minlength is 5
-    </md-error>
-    <md-error *ngIf="task.errors && (task.dirty || task.touched) && task.errors.required">
-      Task is <strong>required</strong>
-    </md-error>
-  </md-input-container>
+  <md-select class="example-full-width"
+    required 
+    name="task" 
+    placeholder="task" 
+    #task="ngModel"
+    [(ngModel)]="note.task">
+    <md-option *ngFor="let task of tasks" [value]="task.title">
+      {{task.title}}
+    </md-option>
+  </md-select>
   <br><br>
   <md-input-container class="example-full-width">
     <input type="number"
