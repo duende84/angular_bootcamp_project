@@ -38,7 +38,14 @@ export class AttendeesService {
 
   create(attendee: Attendee): Promise<Attendee> {
     return this.http
-      .post(this.attendeesUrl, JSON.stringify({name: attendee.name, photo: attendee.photo, updated_at: Date.now()}), {headers: this.headers})
+      .post(this.attendeesUrl, JSON.stringify({
+        name: attendee.name,
+        photo: attendee.photo,
+        updated_at: Date.now(),
+        average_grade: attendee.average_grade,
+        missing_tasks: attendee.missing_tasks,
+        delivered_tasks: attendee.delivered_tasks
+      }), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data as Attendee)
       .catch(this.handleError);

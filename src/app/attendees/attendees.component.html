@@ -1,6 +1,8 @@
 <div>
   <br><br>
   <button md-raised-button (click)="gotoAdd()">Add Attendee</button>
+  <button md-raised-button [disabled]="fullModeActivated" (click)="toggleMode(true)">Full Mode</button>
+  <button md-raised-button [disabled]="!fullModeActivated" (click)="toggleMode(false)">Compact Mode</button>
   <br><br>
   <div class="container mat-elevation-z8">
     <div class="header">
@@ -10,7 +12,7 @@
     </div>
 
     <md-table #table [dataSource]="dataSource" mdSort>
-      <ng-container cdkColumnDef="id">
+      <ng-container cdkColumnDef="id" *ngIf="fullModeActivated">
         <md-header-cell *cdkHeaderCellDef md-sort-header> ID </md-header-cell>
         <md-cell *cdkCellDef="let row"> {{row.id}} </md-cell>
       </ng-container>
@@ -25,7 +27,22 @@
         <md-cell *cdkCellDef="let row"> {{row.name}} </md-cell>
       </ng-container>
 
-      <ng-container cdkColumnDef="updated_at">
+      <ng-container cdkColumnDef="average_grade">
+        <md-header-cell *cdkHeaderCellDef md-sort-header> Average Grade </md-header-cell>
+        <md-cell *cdkCellDef="let row"> {{row.average_grade}} </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="missing_tasks" *ngIf="fullModeActivated">
+        <md-header-cell *cdkHeaderCellDef md-sort-header> Missing Tasks </md-header-cell>
+        <md-cell *cdkCellDef="let row"> {{row.missing_tasks}} </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="delivered_tasks" *ngIf="fullModeActivated">
+        <md-header-cell *cdkHeaderCellDef md-sort-header> Delivered Tasks </md-header-cell>
+        <md-cell *cdkCellDef="let row"> {{row.delivered_tasks}} </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="updated_at" *ngIf="fullModeActivated">
         <md-header-cell *cdkHeaderCellDef md-sort-header> Updated At </md-header-cell>
         <md-cell *cdkCellDef="let row"> {{row.updated_at | date:'medium'}} </md-cell>
       </ng-container>

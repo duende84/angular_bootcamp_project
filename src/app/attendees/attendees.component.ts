@@ -18,9 +18,12 @@ import { AttendeesDataSource } from './attendees.datasource';
   styleUrls: ['./attendees.component.css']
 })
 export class AttendeesComponent implements OnInit {
-  displayedColumns = ['id', 'photo', 'name', 'updated_at', 'details', 'delete'];
+  displayedColumnsFull = ['id', 'photo', 'name', 'average_grade', 'missing_tasks', 'delivered_tasks', 'updated_at', 'details', 'delete'];
+  displayedColumnsCompact = ['photo', 'name', 'average_grade', 'details', 'delete'];
   attendees = new AttendeesDatabase(this.attendeesService);
   dataSource: AttendeesDataSource | null;
+  fullModeActivated = true;
+  displayedColumns = this.fullModeActivated ? this.displayedColumnsFull : this.displayedColumnsCompact;
 
   constructor(private attendeesService: AttendeesService, private router: Router) { }
 
@@ -44,6 +47,11 @@ export class AttendeesComponent implements OnInit {
 
   gotoAdd(): void {
     this.router.navigate(['/attendees/add']);
+  }
+
+  toggleMode(fullMode:boolean) {
+    this.fullModeActivated = fullMode;
+    this.displayedColumns = this.fullModeActivated ? this.displayedColumnsFull : this.displayedColumnsCompact;
   }
 
   delete(id: number): void {
